@@ -95,7 +95,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
     <div className="min-h-screen bg-[#f8f9fa] font-sans selection:bg-red-100 selection:text-red-600 overflow-x-hidden pb-16 lg:pb-0">
       <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-slate-100 px-[5%] py-4 flex justify-between items-center h-16 lg:h-20 transition-all">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg shadow-red-200 group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-200 group-hover:scale-105 transition-transform">
             <Droplet className="text-white fill-current" size={24} />
           </div>
           <span className="text-xl lg:text-2xl font-black text-slate-900 tracking-tighter">BloodLink</span>
@@ -133,7 +133,7 @@ export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
             ) : (
               <Link 
                 to="/login" 
-                className="shimmer-effect relative flex items-center gap-2.5 bg-slate-900 text-white px-6 py-2.5 rounded-xl font-black text-sm hover:bg-black hover:scale-[1.03] hover:shadow-2xl hover:shadow-slate-400/30 transition-all duration-300 active:scale-95 group"
+                className="shimmer-effect relative flex items-center gap-2.5 bg-slate-900 text-white px-6 py-2.5 rounded-lg font-black text-sm hover:bg-black hover:scale-[1.03] hover:shadow-2xl hover:shadow-slate-400/30 transition-all duration-300 active:scale-95 group"
               >
                 <LogIn size={18} className="relative z-10 group-hover:translate-x-1 group-hover:scale-110 transition-all duration-500 ease-out" /> 
                 <span className="relative z-10 tracking-tight">Sign In</span>

@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { PublicLayout } from '../components/PublicLayout';
-import { FAQ } from '../types';
-import { getPublicFaqs } from '../services/api';
+import { PublicLayout } from '../../components/PublicLayout';
+import { FAQ } from '../../types';
+import { getPublicFaqs } from '../../services/api';
 import { Search, ChevronDown } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -24,8 +24,8 @@ export const PublicFaqs = () => {
   };
 
   const filteredFaqs = faqs.filter(f => 
-    f.question.toLowerCase().includes(search.toLowerCase()) || 
-    f.answer.toLowerCase().includes(search.toLowerCase())
+    (f.question || '').toLowerCase().includes(search.toLowerCase()) || 
+    (f.answer || '').toLowerCase().includes(search.toLowerCase())
   );
 
   return (

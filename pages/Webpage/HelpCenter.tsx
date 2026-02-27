@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
-import { PublicLayout } from '../components/PublicLayout';
-import { Layout } from '../components/Layout';
-import { Card, Input, Button, useToast, Toast, Badge } from '../components/UI';
+import { useAuth } from '../../AuthContext';
+import { PublicLayout } from '../../components/PublicLayout';
+import { Layout } from '../../components/Layout';
+import { Card, Input, Button, useToast, Toast, Badge } from '../../components/UI';
 import { HelpCircle, CheckCircle2, RotateCcw, Send, ArrowLeft, Search, Clock, MessageCircle, AlertCircle } from 'lucide-react';
-import { submitHelpRequest, getUserHelpRequests, getHelpRequestsByPhone } from '../services/api';
-import { HelpRequest, HelpStatus } from '../types';
+import { submitHelpRequest, getUserHelpRequests, getHelpRequestsByPhone } from '../../services/api';
+import { HelpRequest, HelpStatus } from '../../types';
 import clsx from 'clsx';
 
 export const HelpCenter = () => {

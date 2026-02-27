@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../../AuthContext';
 import { 
   getDeletedUsers, restoreDeletedUser, permanentlyDeleteArchivedUser,
   getDeletedDonations, restoreDeletedDonation, permanentlyDeleteArchivedDonation,
@@ -8,8 +8,8 @@ import {
   getDeletedNotices, restoreDeletedNotice, permanentlyDeleteArchivedNotice,
   getDeletedHelpRequests, restoreDeletedHelpRequest, permanentlyDeleteArchivedHelpRequest,
   getDeletedLogs, restoreDeletedLog, permanentlyDeleteArchivedLog
-} from '../services/api';
-import { Card, Button, Toast, useToast, ConfirmModal } from '../components/UI';
+} from '../../services/api';
+import { Card, Button, Toast, useToast, ConfirmModal } from '../../components/UI';
 import { Trash2, RotateCcw, Clock, Archive, User, FileText, MessageSquare, AlertCircle, Database, Megaphone, Activity } from 'lucide-react';
 import clsx from 'clsx';
 

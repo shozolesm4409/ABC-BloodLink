@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { getAllFaqs, addFaq, updateFaq, deleteFaq, toggleFaqVisibility } from '../services/api';
-import { Card, Button, Toast, useToast, ConfirmModal, Input } from '../components/UI';
-import { FAQ } from '../types';
+import { useAuth } from '../../AuthContext';
+import { getAllFaqs, addFaq, updateFaq, deleteFaq, toggleFaqVisibility } from '../../services/api';
+import { Card, Button, Toast, useToast, ConfirmModal, Input } from '../../components/UI';
+import { FAQ } from '../../types';
 import { FileQuestion, Plus, Edit, Trash2, Eye, EyeOff, X, CornerDownRight, MessageCircle } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -110,13 +110,13 @@ export const AdminFaqs = () => {
       {/* Edit/Add Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in zoom-in-95 duration-200">
-          <Card className="w-full max-w-lg p-8 shadow-2xl bg-white border-0 rounded-[2.5rem]">
+          <Card className="w-full max-w-lg p-8 shadow-2xl bg-white border-0 rounded-xl">
             <div className="flex justify-between items-center mb-8">
                <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-3">
                  {editItem ? <Edit className="text-blue-600" /> : <Plus className="text-green-600" />} 
                  {editItem ? 'Edit FAQ' : 'Add New FAQ'}
                </h3>
-               <button onClick={() => setShowModal(false)} className="p-2 bg-slate-50 rounded-xl hover:bg-slate-100"><X size={20} /></button>
+               <button onClick={() => setShowModal(false)} className="p-2 bg-slate-50 rounded-lg hover:bg-slate-100"><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-5">
               <Input label="Question" value={formQuestion} onChange={e => setFormQuestion(e.target.value)} required placeholder="e.g. How can I donate?" />
@@ -127,12 +127,12 @@ export const AdminFaqs = () => {
                   onChange={e => setFormAnswer(e.target.value)} 
                   required 
                   rows={5} 
-                  className="w-full px-4 py-3 bg-slate-50 border-0 rounded-xl text-sm font-medium focus:ring-2 focus:ring-blue-500/20 outline-none resize-none"
+                  className="w-full px-4 py-3 bg-slate-50 border-0 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500/20 outline-none resize-none"
                   placeholder="Enter the detailed answer..."
                 />
               </div>
               <div className="pt-4 flex gap-4">
-                <Button type="submit" isLoading={actionLoading} className="flex-1 py-4 rounded-2xl shadow-xl">
+                <Button type="submit" isLoading={actionLoading} className="flex-1 py-4 rounded-lg shadow-xl">
                   {editItem ? 'Save Changes' : 'Create FAQ'}
                 </Button>
               </div>
@@ -143,7 +143,7 @@ export const AdminFaqs = () => {
 
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 border-b border-slate-200 pb-8">
         <div className="flex items-center gap-4">
-          <div className="p-4 bg-purple-600 text-white rounded-[1.5rem] shadow-xl shadow-purple-100">
+          <div className="p-4 bg-purple-600 text-white rounded-lg shadow-xl shadow-purple-100">
             <FileQuestion size={28} />
           </div>
           <div>
@@ -151,30 +151,30 @@ export const AdminFaqs = () => {
             <p className="text-sm text-slate-500 font-medium">Manage public questions and answers.</p>
           </div>
         </div>
-        <Button onClick={openAddModal} className="rounded-2xl px-8 py-4 shadow-xl shadow-purple-100 bg-purple-600 hover:bg-purple-700 border-0 text-white">
+        <Button onClick={openAddModal} className="rounded-lg px-8 py-4 shadow-xl shadow-purple-100 bg-purple-600 hover:bg-purple-700 border-0 text-white">
           <Plus className="mr-2" size={18} /> Add New FAQ
         </Button>
       </div>
 
-      <Card className="overflow-hidden border-0 shadow-lg bg-white rounded-[2.5rem]">
+      <Card className="overflow-hidden border-0 shadow-lg bg-white rounded-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-50 border-b border-slate-100 text-[10px] font-black uppercase text-slate-400 tracking-widest">
               <tr>
-                <th className="px-8 py-6 w-20 text-center">No.</th>
-                <th className="px-8 py-6">Knowledge Base Content</th>
-                <th className="px-8 py-6 text-right w-48">Status & Actions</th>
+                <th className="px-3 py-2 w-20 text-center">No.</th>
+                <th className="px-3 py-2">Knowledge Base Content</th>
+                <th className="px-3 py-2 text-right w-48">Status & Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
               {faqs.map((faq, index) => (
                 <tr key={faq.id} className={clsx("hover:bg-slate-50/50 transition-colors group", !faq.isVisible && "bg-slate-50 opacity-75 grayscale")}>
-                  <td className="px-8 py-8 text-center font-black text-slate-300 text-sm align-top pt-8">{index + 1}</td>
-                  <td className="px-8 py-8 align-top">
+                  <td className="px-2 py-2 text-center font-black text-slate-300 text-sm align-top pt-4">{index + 1}</td>
+                  <td className="px-2 py-2 align-top">
                     <div className="flex gap-5">
                        {/* Q Icon */}
-                       <div className="flex-shrink-0 mt-1">
-                          <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black shadow-sm text-sm border border-blue-100">Q</div>
+                       <div className="flex-shrink-0 mt-.5">
+                          <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-black shadow-sm text-sm border border-blue-100">Q</div>
                        </div>
                        
                        <div className="space-y-6 w-full max-w-3xl">
@@ -183,26 +183,26 @@ export const AdminFaqs = () => {
                           </div>
                           
                           <div className="flex gap-4">
-                             <div className="flex-shrink-0 mt-1">
-                                <CornerDownRight size={20} className="text-slate-300" />
+                             <div className="flex-shrink-0 mt-.5">
+                                <CornerDownRight size={15} className="text-slate-300" />
                              </div>
-                             <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 w-full relative transition-all group-hover:bg-white group-hover:shadow-sm">
+                             <div className="bg-slate-50 rounded-lg p-1.5 border border-slate-100 w-full relative transition-all group-hover:bg-white group-hover:shadow-sm">
                                 <p className="text-sm text-slate-600 leading-relaxed font-medium">{faq.answer}</p>
                                 <div className="absolute -top-3 -left-2 bg-white text-slate-300 rounded-full p-1 border border-slate-100 shadow-sm">
-                                   <MessageCircle size={14} fill="currentColor" className="opacity-50" />
+                                   <MessageCircle size={11} fill="currentColor" className="opacity-50" />
                                 </div>
                              </div>
                           </div>
                        </div>
                     </div>
                   </td>
-                  <td className="px-8 py-8 text-right align-top pt-8">
+                  <td className="px-2 py-2 text-right align-top pt-3">
                     <div className="flex flex-col items-end gap-3">
-                       <div className={clsx("px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border mb-2", faq.isVisible ? "bg-green-50 text-green-600 border-green-100" : "bg-slate-100 text-slate-400 border-slate-200")}>
+                       <div className={clsx("px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest border mb-2", faq.isVisible ? "bg-green-50 text-green-600 border-green-100" : "bg-slate-100 text-slate-400 border-slate-200")}>
                           {faq.isVisible ? 'Published' : 'Draft / Hidden'}
                        </div>
                        
-                       <div className="flex items-center gap-1 bg-white border border-slate-100 p-1.5 rounded-xl shadow-sm">
+                       <div className="flex items-center gap-1 bg-white border border-slate-100 p-1.5 rounded-lg shadow-sm">
                           <button 
                             onClick={() => openEditModal(faq)} 
                             className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
@@ -236,7 +236,7 @@ export const AdminFaqs = () => {
               ))}
               {faqs.length === 0 && (
                 <tr>
-                  <td colSpan={3} className="px-8 py-20 text-center text-slate-300 font-black uppercase tracking-[0.3em] italic border-2 border-dashed border-slate-100 m-8 rounded-[2rem]">
+                  <td colSpan={3} className="px-8 py-20 text-center text-slate-300 font-black uppercase tracking-[0.3em] italic border-2 border-dashed border-slate-100 m-8 rounded-xl">
                     No FAQs found. Add one to get started.
                   </td>
                 </tr>

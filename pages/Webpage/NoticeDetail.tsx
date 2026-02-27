@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getNoticeById } from '../services/api';
-import { PublicLayout } from '../components/PublicLayout';
-import { Card, Badge, Button } from '../components/UI';
-import { Notice } from '../types';
+import { getNoticeById } from '../../services/api';
+import { PublicLayout } from '../../components/PublicLayout';
+import { Card, Badge, Button } from '../../components/UI';
+import { Notice } from '../../types';
 import { Calendar, User as UserIcon, Pin, ArrowLeft, Tag } from 'lucide-react';
 import clsx from 'clsx';
 

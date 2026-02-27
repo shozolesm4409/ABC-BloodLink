@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { getDonations, updateDonationStatus, deleteDonationRecord } from '../services/api';
-import { Card, Badge, Button, Toast, useToast, ConfirmModal } from '../components/UI';
-import { DonationRecord, DonationStatus } from '../types';
+import { useAuth } from '../../AuthContext';
+import { getDonations, updateDonationStatus, deleteDonationRecord } from '../../services/api';
+import { Card, Badge, Button, Toast, useToast, ConfirmModal } from '../../components/UI';
+import { DonationRecord, DonationStatus } from '../../types';
 import { Database, Check, X, Trash2, Search, Filter, User, MapPin, Clock } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -55,8 +55,8 @@ export const AdminDonations = () => {
 
   const filtered = donations.filter(d => {
     const matchesFilter = filter === 'ALL' || d.status === filter;
-    const matchesSearch = d.userName.toLowerCase().includes(search.toLowerCase()) || 
-                          d.location.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = (d.userName || '').toLowerCase().includes(search.toLowerCase()) || 
+                          (d.location || '').toLowerCase().includes(search.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 

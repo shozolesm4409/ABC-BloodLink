@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../../AuthContext';
 import * as ReactRouterDOM from 'react-router-dom';
 import { 
   getUsers, 
@@ -15,11 +15,11 @@ import {
   getDonations,
   generateUserId,
   ADMIN_EMAIL
-} from '../services/api';
-import { Card, Badge, Button, Input, Toast, useToast, ConfirmModal, Select } from '../components/UI';
-import { User, UserRole, BloodGroup, DonationStatus } from '../types';
+} from '../../services/api';
+import { Card, Badge, Button, Input, Toast, useToast, ConfirmModal, Select } from '../../components/UI';
+import { User, UserRole, BloodGroup, DonationStatus } from '../../types';
 import { Search, User as UserIcon, Trash2, Key, Layout, Shield, ShieldCheck, UserCheck, MessageSquare, LifeBuoy, X, Edit2, Ban, IdCard, MoreVertical, Phone, MapPin, Star, Trophy, Medal, Award, Wand2, Settings, Fingerprint, Edit, Filter } from 'lucide-react';
-import { getRankData } from './Profile';
+import { getRankData } from '../Users/Profile';
 import clsx from 'clsx';
 
 const { useNavigate } = ReactRouterDOM;
@@ -34,7 +34,7 @@ const AccessHub = ({ users, onAction, searchQuery, accessType, accessStatus }: {
   
   // Filter Logic for Access Hub
   const filteredUsers = users.filter(u => {
-    const matchesSearch = u.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = (u.name || '').toLowerCase().includes(searchQuery.toLowerCase());
     
     if (!matchesSearch) return false;
     
@@ -185,7 +185,7 @@ export const AdminUserManagement = () => {
 
   useEffect(() => { fetchData(); }, []);
 
-  const isSuperAdminViewer = admin?.role === UserRole.SUPERADMIN || admin?.email.trim().toLowerCase() === ADMIN_EMAIL;
+  const isSuperAdminViewer = admin?.role === UserRole.SUPERADMIN || (admin?.email || '').trim().toLowerCase() === ADMIN_EMAIL;
 
   const handleDelete = async () => {
     if (!admin || !deleteUserId) return;
@@ -279,7 +279,7 @@ export const AdminUserManagement = () => {
 
   // User List filtering
   const filteredUsers = users.filter(u => {
-    const matchesSearch = u.name.toLowerCase().includes(searchTerm.toLowerCase()) || u.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (u.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || (u.email || '').toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = roleFilter === 'ALL' || u.role === roleFilter;
     return matchesSearch && matchesRole;
   });

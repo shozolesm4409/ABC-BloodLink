@@ -17,14 +17,14 @@ const AuthLayout = ({ children, title, subtitle, headline, description, styles }
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center p-3 lg:p-6 font-sans selection:bg-red-100">
       <div 
-        className="w-full max-w-5xl bg-white rounded-[2rem] shadow-[0_20px_70px_-15px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row h-auto relative border border-slate-100"
+        className="w-full max-w-5xl bg-white rounded-xl shadow-[0_20px_70px_-15px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row h-auto relative border border-slate-100"
         style={{ marginTop: styles?.margin ?? 20, marginBottom: styles?.margin ?? 20 }}
       >
         <div className="lg:w-[38%] bg-gradient-to-br from-[#c1121f] to-[#780116] relative overflow-hidden flex flex-col justify-center p-8 lg:p-10 text-white order-2 lg:order-1">
           <div className="absolute top-[-5%] left-[-5%] w-[250px] h-[250px] bg-red-400 rounded-full mix-blend-screen filter blur-[80px] opacity-20 animate-pulse"></div>
           
           <div className="relative z-10 space-y-4">
-            <div className="w-12 h-12 lg:w-14 lg:h-14 bg-white/10 backdrop-blur-2xl rounded-2xl flex items-center justify-center mb-2 border border-white/20 shadow-inner">
+            <div className="w-12 h-12 lg:w-14 lg:h-14 bg-white/10 backdrop-blur-2xl rounded-lg flex items-center justify-center mb-2 border border-white/20 shadow-inner">
               <Droplet className="text-white fill-current" size={28} />
             </div>
             
@@ -72,7 +72,7 @@ const CustomInput = ({ icon: Icon, type = "text", name, placeholder, value, onCh
         value={value}
         onChange={onChange}
         required
-        className="w-full pl-11 pr-16 py-3.5 lg:py-4 bg-[#f8fafc] border-2 border-transparent rounded-[1.25rem] text-slate-900 font-bold text-sm lg:text-base focus:bg-white focus:border-red-600/30 outline-none transition-all placeholder:text-slate-300 placeholder:font-medium shadow-sm"
+        className="w-full pl-11 pr-16 py-3.5 lg:py-4 bg-[#f8fafc] border-2 border-transparent rounded-lg text-slate-900 font-bold text-sm lg:text-base focus:bg-white focus:border-red-600/30 outline-none transition-all placeholder:text-slate-300 placeholder:font-medium shadow-sm"
       />
       {showPasswordToggle && (
         <button
@@ -179,7 +179,7 @@ export const Login = () => {
                   className="peer w-4.5 h-4.5 opacity-0 absolute cursor-pointer" 
                 />
                 <div className={clsx(
-                  "w-5 h-5 border-2 rounded-md transition-all shadow-sm flex items-center justify-center",
+                  "w-5 h-5 border-2 rounded transition-all shadow-sm flex items-center justify-center",
                   rememberMe ? "bg-red-600 border-red-600" : "border-slate-200 bg-white"
                 )}>
                   {rememberMe && <CheckCircle size={14} className="text-white" />}
@@ -190,11 +190,11 @@ export const Login = () => {
             <button type="button" onClick={() => navigate('/reset')} className="text-sm lg:text-base font-black text-red-600 hover:underline">Forgot Password?</button>
           </div>
           {error && (
-            <div className="mb-4 p-3.5 bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-widest rounded-xl border border-red-100 flex items-center gap-2">
+            <div className="mb-4 p-3.5 bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-widest rounded-lg border border-red-100 flex items-center gap-2">
               <AlertCircle size={14} /> {error}
             </div>
           )}
-          <button type="submit" disabled={loading} className="w-full bg-[#c1121f] text-white py-4 lg:py-5 rounded-[1.25rem] font-black uppercase tracking-[0.25em] text-base lg:text-lg shadow-xl shadow-red-900/20 hover:bg-[#a0101a] transition-all disabled:opacity-50">
+          <button type="submit" disabled={loading} className="w-full bg-[#c1121f] text-white py-4 lg:py-5 rounded-lg font-black uppercase tracking-[0.25em] text-base lg:text-lg shadow-xl shadow-red-900/20 hover:bg-[#a0101a] transition-all disabled:opacity-50">
             {loading ? "Signing In..." : (config?.loginButtonLabel || "SIGN IN")}
           </button>
           <p className="text-center text-sm lg:text-base font-bold text-slate-400 mt-6 lg:mt-8">
@@ -263,7 +263,7 @@ export const Register = () => {
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300">
                 <Droplet size={18} />
               </div>
-              <select name="bloodGroup" required className="w-full pl-11 pr-3 py-3.5 lg:py-4 bg-[#f8fafc] border-2 border-transparent rounded-[1.25rem] text-slate-900 font-bold text-sm focus:bg-white focus:border-red-600/30 outline-none appearance-none cursor-pointer shadow-sm">
+              <select name="bloodGroup" required className="w-full pl-11 pr-3 py-3.5 lg:py-4 bg-[#f8fafc] border-2 border-transparent rounded-lg text-slate-900 font-bold text-sm focus:bg-white focus:border-red-600/30 outline-none appearance-none cursor-pointer shadow-sm">
                 <option value="">রক্তের গ্রুপ</option>
                 {BLOOD_GROUPS.map(bg => <option key={bg} value={bg}>{bg}</option>)}
               </select>
@@ -272,7 +272,7 @@ export const Register = () => {
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300">
                 <Phone size={18} />
               </div>
-              <input name="phone" placeholder="ফোন নম্বর" required className="w-full pl-11 pr-3 py-3.5 lg:py-4 bg-[#f8fafc] border-2 border-transparent rounded-[1.25rem] text-slate-900 font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm" />
+              <input name="phone" placeholder="ফোন নম্বর" required className="w-full pl-11 pr-3 py-3.5 lg:py-4 bg-[#f8fafc] border-2 border-transparent rounded-lg text-slate-900 font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm" />
             </div>
           </div>
           <CustomInput icon={MapPin} name="location" placeholder="বর্তমান এলাকা/শহর" />
@@ -281,11 +281,11 @@ export const Register = () => {
             <CustomInput icon={Lock} type={showPassword ? 'text' : 'password'} name="confirmPassword" placeholder="নিশ্চিত করুন" />
           </div>
           {error && (
-            <div className="p-3.5 bg-red-50 text-red-600 text-[9px] font-black uppercase tracking-widest rounded-xl border border-red-100 flex items-center gap-2">
+            <div className="p-3.5 bg-red-50 text-red-600 text-[9px] font-black uppercase tracking-widest rounded-lg border border-red-100 flex items-center gap-2">
               <AlertCircle size={14} /> {error}
             </div>
           )}
-          <button type="submit" disabled={loading} className="w-full bg-[#c1121f] text-white py-4 lg:py-5 rounded-[1.25rem] font-black uppercase tracking-[0.25em] text-sm lg:text-base shadow-xl shadow-red-900/20 hover:bg-[#a0101a] transition-all disabled:opacity-50 mt-4">
+          <button type="submit" disabled={loading} className="w-full bg-[#c1121f] text-white py-4 lg:py-5 rounded-lg font-black uppercase tracking-[0.25em] text-sm lg:text-base shadow-xl shadow-red-900/20 hover:bg-[#a0101a] transition-all disabled:opacity-50 mt-4">
             {loading ? "Creating Account..." : (config?.registerButtonLabel || "CREATE ACCOUNT")}
           </button>
           <p className="text-center text-sm lg:text-base font-bold text-slate-400 pt-6 lg:pt-8">
@@ -336,12 +336,12 @@ export const ResetPassword = () => {
             <CustomInput icon={Mail} type="email" name="email" placeholder="আপনার জিমেইল এড্রেস" value={email} onChange={(e: any) => setEmail(e.target.value)} />
             
             {error && (
-              <div className="p-3.5 bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-widest rounded-xl border border-red-100 flex items-center gap-2">
+              <div className="p-3.5 bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-widest rounded-lg border border-red-100 flex items-center gap-2">
                 <AlertCircle size={14} /> {error}
               </div>
             )}
             
-            <button type="submit" disabled={loading} className="w-full bg-[#c1121f] text-white py-4 lg:py-5 rounded-[1.25rem] font-black uppercase tracking-[0.25em] text-base lg:text-lg shadow-xl shadow-red-900/20 hover:bg-[#a0101a] transition-all disabled:opacity-50">
+            <button type="submit" disabled={loading} className="w-full bg-[#c1121f] text-white py-4 lg:py-5 rounded-lg font-black uppercase tracking-[0.25em] text-base lg:text-lg shadow-xl shadow-red-900/20 hover:bg-[#a0101a] transition-all disabled:opacity-50">
               {loading ? "প্রসেসিং..." : (config?.resetButtonLabel || "রিসেট লিংক পাঠান")}
             </button>
             
@@ -365,14 +365,14 @@ export const ResetPassword = () => {
         description={config?.sentDescription || "আপনার জিমেইলের ইনবক্স অথবা স্প্যাম ফোল্ডার চেক করুন। সেখানে একটি বাটন পাবেন যা আপনাকে পাসওয়ার্ড পরিবর্তন করতে সাহায্য করবে।"}
       >
         <div className="text-center py-10 space-y-8 animate-in zoom-in-95 duration-500">
-           <div className="w-24 h-24 bg-red-50 text-red-600 rounded-[2.5rem] flex items-center justify-center mx-auto shadow-inner">
+           <div className="w-24 h-24 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mx-auto shadow-inner">
               <Send size={48} className="animate-pulse" />
            </div>
            <div className="space-y-4">
               <p className="text-slate-500 font-medium leading-relaxed">
                  আমরা সরাসরি Google-এর মাধ্যমে আপনাকে একটি ইমেইল পাঠিয়েছি। মেইলের লিংকে ক্লিক করে নতুন পাসওয়ার্ড সেট করুন।
               </p>
-              <div className="p-4 bg-orange-50 border border-orange-100 rounded-2xl flex items-start gap-3">
+              <div className="p-4 bg-orange-50 border border-orange-100 rounded-lg flex items-start gap-3">
                  <ShieldAlert size={18} className="text-orange-600 mt-0.5 flex-shrink-0" />
                  <p className="text-[10px] text-orange-700 font-bold leading-tight text-left">
                     পাসওয়ার্ড পরিবর্তন করার পর আপনি পুনরায় অ্যাপে ফিরে এসে নতুন পাসওয়ার্ড দিয়ে লগইন করতে পারবেন।
@@ -380,7 +380,7 @@ export const ResetPassword = () => {
               </div>
            </div>
            <div className="flex flex-col gap-3">
-             <Link to="/login" className="w-full bg-slate-900 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-black transition-all">
+             <Link to="/login" className="w-full bg-slate-900 text-white py-4 rounded-lg font-black uppercase tracking-widest text-xs hover:bg-black transition-all">
                 {config?.sentGoToLoginLabel || "লগইন পেজে ফিরে যান"}
              </Link>
              <button onClick={() => setStep('email')} className="text-[10px] font-black uppercase text-slate-400 hover:text-red-600 transition-colors">

@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { db, subscribeToApprovedFeedbacks, getLandingConfig, getCachedFeedbacks, getUsers } from '../services/api';
-import { DonationStatus, DonationFeedback, LandingPageConfig, User, BloodGroup } from '../types';
+import { db, subscribeToApprovedFeedbacks, getLandingConfig, getCachedFeedbacks, getUsers } from '../../services/api';
+import { DonationStatus, DonationFeedback, LandingPageConfig, User, BloodGroup } from '../../types';
 import { Droplet, Users, HeartPulse, Activity, User as UserIcon, Calendar, ArrowRight, ShieldCheck, Quote, Trophy, Sparkles, Search } from 'lucide-react';
-import { PublicLayout } from '../components/PublicLayout';
-import { getRankData } from './Profile';
-import { Card } from '../components/UI';
+import { PublicLayout } from '../../components/PublicLayout';
+import { getRankData } from '../Users/Profile';
+import { Card } from '../../components/UI';
 import clsx from 'clsx';
 
 const { Link } = ReactRouterDOM;

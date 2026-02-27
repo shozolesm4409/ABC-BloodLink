@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { PublicLayout } from '../components/PublicLayout';
-import { Card } from '../components/UI';
+import { PublicLayout } from '../../components/PublicLayout';
+import { Card } from '../../components/UI';
 import { ShieldCheck, Lock, Eye, Database, Share2, UserCheck, ArrowLeft, Mail, HelpCircle, ArrowRight, MessageSquareQuote, Megaphone } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
-import { getLandingConfig } from '../services/api';
-import { LandingPageConfig } from '../types';
+import { getLandingConfig } from '../../services/api';
+import { LandingPageConfig } from '../../types';
 
 const PolicySection: React.FC<{ icon: any, title: string, titleBn: string, children?: React.ReactNode }> = ({ icon: Icon, title, titleBn, children }) => (
   <div className="space-y-4">

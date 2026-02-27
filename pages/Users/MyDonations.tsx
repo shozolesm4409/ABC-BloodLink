@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { getUserDonations, addDonation, deleteDonationRecord } from '../services/api';
-import { useAuth } from '../AuthContext';
-import { DonationRecord, DonationStatus } from '../types';
-import { Card, Button, Input, Badge, ConfirmModal } from '../components/UI';
+import { getUserDonations, addDonation, deleteDonationRecord } from '../../services/api';
+import { useAuth } from '../../AuthContext';
+import { DonationRecord, DonationStatus } from '../../types';
+import { Card, Button, Input, Badge, ConfirmModal } from '../../components/UI';
 import { Plus, History as HistoryIcon, Clock, Check, Calendar, Trash2, Users, Shuffle } from 'lucide-react';
 import clsx from 'clsx';
 

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../../AuthContext';
 import { 
   requestSupportAccess, 
   sendMessage, 
@@ -11,10 +11,10 @@ import {
   markMessagesAsRead,
   getUsers,
   getAppPermissions
-} from '../services/api';
-import { Card, Button, Input, Badge, Toast, useToast } from '../components/UI';
+} from '../../services/api';
+import { Card, Button, Input, Badge, Toast, useToast } from '../../components/UI';
 import { LifeBuoy, Lock, BookOpen, MessageSquare, PhoneCall, HelpCircle, CheckCircle, Send, ArrowLeft, Search, User as UserIcon, AlertCircle, ArrowRight, ShieldAlert, Paperclip, Smile, MoreHorizontal, MessageCircle, X } from 'lucide-react';
-import { ChatMessage, UserRole, User, AppPermissions } from '../types';
+import { ChatMessage, UserRole, User, AppPermissions } from '../../types';
 import clsx from 'clsx';
 
 const { useNavigate } = ReactRouterDOM;

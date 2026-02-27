@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getWebNotices } from '../services/api';
-import { PublicLayout } from '../components/PublicLayout';
-import { Card, Badge, Button } from '../components/UI';
-import { Notice } from '../types';
+import { getWebNotices } from '../../services/api';
+import { PublicLayout } from '../../components/PublicLayout';
+import { Card, Badge, Button } from '../../components/UI';
+import { Notice } from '../../types';
 import { Megaphone, Calendar, User as UserIcon, Pin, ArrowRight } from 'lucide-react';
 import clsx from 'clsx';
 

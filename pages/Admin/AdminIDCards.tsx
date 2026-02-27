@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { getUsers } from '../services/api';
-import { Card, Button, Badge } from '../components/UI';
-import { User, UserRole } from '../types';
+import { getUsers } from '../../services/api';
+import { Card, Button, Badge } from '../../components/UI';
+import { User, UserRole } from '../../types';
 import { Download, Droplet, User as UserIcon, ShieldCheck, Printer, QrCode, Search } from 'lucide-react';
 import { toJpeg } from 'html-to-image';
 import clsx from 'clsx';
@@ -149,7 +149,7 @@ export const AdminIDCards = () => {
     
     const lowerSearch = searchTerm.toLowerCase();
     const matchesSearch = !lowerSearch || 
-      u.name.toLowerCase().includes(lowerSearch) || 
+      (u.name || '').toLowerCase().includes(lowerSearch) || 
       (u.idNumber && u.idNumber.toLowerCase().includes(lowerSearch)) || 
       (u.phone && u.phone.toLowerCase().includes(lowerSearch));
 

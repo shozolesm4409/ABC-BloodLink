@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { getHelpRequests, updateHelpRequest, deleteHelpRequest } from '../services/api';
-import { Card, Badge, Button, Toast, useToast, ConfirmModal, Select, Input } from '../components/UI';
-import { HelpRequest, HelpStatus, UserRole } from '../types';
+import { useAuth } from '../../AuthContext';
+import { getHelpRequests, updateHelpRequest, deleteHelpRequest } from '../../services/api';
+import { Card, Badge, Button, Toast, useToast, ConfirmModal, Select, Input } from '../../components/UI';
+import { HelpRequest, HelpStatus, UserRole } from '../../types';
 import { HelpCircle, Save, Trash2, Edit2, CheckCircle2, AlertCircle, XCircle, Search, Filter } from 'lucide-react';
 import clsx from 'clsx';
 

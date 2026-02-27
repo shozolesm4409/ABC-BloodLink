@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db, logVerificationCheck } from '../services/api';
-import { User, DonationFeedback, FeedbackStatus, DonationStatus } from '../types';
-import { Card, Badge, Button } from '../components/UI';
+import { db, logVerificationCheck } from '../../services/api';
+import { User, DonationFeedback, FeedbackStatus, DonationStatus } from '../../types';
+import { Card, Badge, Button } from '../../components/UI';
 import { CheckCircle2, ShieldCheck, Droplet, MapPin, Calendar, AlertCircle, Search, User as UserIcon, MessageSquareQuote, Quote, QrCode, Clock, History, Award } from 'lucide-react';
-import { getRankData } from './Profile';
+import { getRankData } from '../Users/Profile';
 import clsx from 'clsx';
 
 const { useParams, useNavigate, useLocation } = ReactRouterDOM;

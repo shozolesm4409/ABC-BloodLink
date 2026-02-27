@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { getLogs, deleteLogEntry } from '../services/api';
-import { Card, Badge, Button, Toast, useToast, ConfirmModal } from '../components/UI';
-import { useAuth } from '../AuthContext';
-import { AuditLog } from '../types';
+import { getLogs, deleteLogEntry } from '../../services/api';
+import { Card, Badge, Button, Toast, useToast, ConfirmModal } from '../../components/UI';
+import { useAuth } from '../../AuthContext';
+import { AuditLog } from '../../types';
 import { RotateCcw, User as UserIcon, Trash2, Clock, Activity, ShieldCheck, Filter } from 'lucide-react';
 import clsx from 'clsx';
 

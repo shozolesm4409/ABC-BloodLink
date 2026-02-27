@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { getLandingConfig, updateLandingConfig } from '../services/api';
-import { Card, Button, Input, Toast, useToast } from '../components/UI';
-import { LandingPageConfig } from '../types';
+import { useAuth } from '../../AuthContext';
+import { getLandingConfig, updateLandingConfig } from '../../services/api';
+import { Card, Button, Input, Toast, useToast } from '../../components/UI';
+import { LandingPageConfig } from '../../types';
 import { Monitor, Save, Globe, LogIn, UserPlus, List, BarChart, MessageSquare, Layout, Megaphone, Key, MailCheck, ShieldCheck, Database, Lock, Eye, Share2, UserCheck, Mail, Send, History, Info, Type } from 'lucide-react';
 import clsx from 'clsx';
 

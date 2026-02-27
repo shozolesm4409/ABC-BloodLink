@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { getUsers, requestDirectoryAccess, getDonations, getUserFeedbacks } from '../services/api';
-import { Card, Badge, Button, Toast, useToast } from '../components/UI';
-import { User, BloodGroup, UserRole, DonationRecord, DonationFeedback, FeedbackStatus } from '../types';
+import { useAuth } from '../../AuthContext';
+import { getUsers, requestDirectoryAccess, getDonations, getUserFeedbacks } from '../../services/api';
+import { Card, Badge, Button, Toast, useToast } from '../../components/UI';
+import { User, BloodGroup, UserRole, DonationRecord, DonationFeedback, FeedbackStatus } from '../../types';
 import { Lock, ShieldAlert, MapPin, Phone, Calendar, User as UserIcon, Search, Droplet, Filter, X, Mail, Hash, Activity, CheckCircle2, AlertCircle, Quote, Star, Trophy, Award, Medal, MessageSquareQuote } from 'lucide-react';
 import clsx from 'clsx';
 import { getRankData } from './Profile';
@@ -89,8 +89,8 @@ export const DonorDirectory = () => {
     const searchLower = filter.toLowerCase();
     
     const matchesSearch = 
-      u.name.toLowerCase().includes(searchLower) || 
-      u.location.toLowerCase().includes(searchLower) ||
+      (u.name || '').toLowerCase().includes(searchLower) || 
+      (u.location || '').toLowerCase().includes(searchLower) ||
       (u.idNumber && u.idNumber.toLowerCase().includes(searchLower));
       
     const matchesGroup = group === '' || u.bloodGroup === group;

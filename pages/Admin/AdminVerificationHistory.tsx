@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { getVerificationLogs } from '../services/api';
-import { Card, Badge, Button } from '../components/UI';
+import { getVerificationLogs } from '../../services/api';
+import { Card, Badge, Button } from '../../components/UI';
 import { ClipboardList, RotateCcw, Clock, User as UserIcon, ShieldCheck, Droplet, User } from 'lucide-react';
-import { BloodGroup } from '../types';
+import { BloodGroup } from '../../types';
 
 export const AdminVerificationHistory = () => {
   const [logs, setLogs] = useState<any[]>([]);

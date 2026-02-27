@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { getAppPermissions, updateAppPermissions, ADMIN_EMAIL, getUsers, updateUserProfile } from '../services/api';
-import { Card, Button, Badge, Toast, useToast, Input } from '../components/UI';
-import { RolePermissions, AppPermissions, UserRole, User } from '../types';
+import { useAuth } from '../../AuthContext';
+import { getAppPermissions, updateAppPermissions, ADMIN_EMAIL, getUsers, updateUserProfile } from '../../services/api';
+import { Card, Button, Badge, Toast, useToast, Input } from '../../components/UI';
+import { RolePermissions, AppPermissions, UserRole, User } from '../../types';
 import { Shield, Layout, Eye, EyeOff, Lock, Unlock, Save, Search, User as UserIcon, X, UserCog, ShieldAlert, ArrowLeft, ChevronRight, Check } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
@@ -181,7 +181,7 @@ export const AdminRolePermissions = () => {
 
   const filteredUsers = allUsers.filter(u => 
     u.id !== admin?.id && 
-    (u.name.toLowerCase().includes(searchQuery.toLowerCase()) || u.email.toLowerCase().includes(searchQuery.toLowerCase()))
+    ((u.name || '').toLowerCase().includes(searchQuery.toLowerCase()) || (u.email || '').toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   if (loading) return <div className="p-10 text-center font-black text-slate-300 animate-pulse">Syncing...</div>;

@@ -117,7 +117,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
         to={to}
         onClick={() => setIsMobileMenuOpen(false)}
         className={clsx(
-          "flex items-center justify-between px-2 py-1.5 rounded-xl transition-all duration-200 group relative",
+          "flex items-center justify-between px-2 py-1.5 rounded-lg transition-all duration-200 group relative",
           isActive 
             ? "bg-red-50 text-red-600 font-bold shadow-sm" 
             : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -133,7 +133,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
             <span 
               key={i}
               className={clsx(
-                "text-white text-[9px] font-black px-1.5 py-0.5 rounded-lg shadow-sm animate-in zoom-in-50",
+                "text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-sm animate-in zoom-in-50",
                 b.color === 'red' ? "bg-red-600" : b.color === 'blue' ? "bg-blue-600" : "bg-green-600"
               )}
             >
@@ -210,7 +210,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
         isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <Link to="/" className="h-20 flex-shrink-0 flex items-center px-6 gap-3 mb-2 hover:opacity-80 transition-opacity">
-          <div className="w-10 h-10 bg-red-600 rounded-2xl flex items-center justify-center shadow-xl shadow-red-100 ring-4 ring-red-50">
+          <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-xl shadow-red-100 ring-4 ring-red-50">
             <Droplet className="text-white fill-current" size={22} />
           </div>
           <div>
@@ -269,8 +269,8 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
         </div>
 
         <div className="p-2 border-t border-slate-100 bg-slate-50/50 flex-shrink-0">
-          <div className="flex items-center gap-3 p-2 bg-white rounded-l border border-slate-200 shadow-sm mb-2">
-            <div className="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center font-black overflow-hidden border border-red-100">
+          <div className="flex items-center gap-3 p-2 bg-white rounded-lg border border-slate-200 shadow-sm mb-2">
+            <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center font-black overflow-hidden border border-red-100">
               {user?.avatar ? <img src={user.avatar} className="w-full h-full object-cover" /> : user?.name.charAt(0)}
             </div>
             <div className="flex-1 min-w-0">
@@ -280,7 +280,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
           </div>
           <button 
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 py-2 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-red-600 transition-colors bg-white rounded-xl border border-slate-200 hover:border-red-100 shadow-sm active:scale-95"
+            className="w-full flex items-center justify-center gap-2 py-2 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-red-600 transition-colors bg-white rounded-lg border border-slate-200 hover:border-red-100 shadow-sm active:scale-95"
           >
             <LogOut size={16} /> Sign Out
           </button>
@@ -290,7 +290,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
       <main className="flex-1 flex flex-col min-0 h-screen overflow-hidden relative">
         <header className="bg-white/80 backdrop-blur-md border-b border-slate-200 h-16 flex-shrink-0 flex items-center justify-between px-3 shadow-sm z-40 sticky top-0">
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <div className="w-8 h-8 bg-red-600 rounded-l flex items-center justify-center">
+            <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
               <Droplet className="text-white fill-current" size={18} />
             </div>
             <span className="font-black text-slate-900 tracking-tighter text-lg">BloodLink</span>
@@ -298,7 +298,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
           <div className="hidden lg:block">
             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Authenticated Session</span>
           </div>
-          <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 bg-slate-50/50 rounded-l border border-slate-100 lg:hidden">
+          <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 bg-slate-50/50 rounded-lg border border-slate-100 lg:hidden">
             <Menu size={20} className="text-slate-700" />
           </button>
         </header>

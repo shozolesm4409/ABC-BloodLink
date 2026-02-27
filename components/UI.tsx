@@ -6,7 +6,7 @@ import { Loader2, X, AlertTriangle, CheckCircle2, Info, AlertCircle } from 'luci
 // Fix: Support ref for Card component to resolve TS error in Dashboard.tsx
 export const Card = React.forwardRef<HTMLDivElement, { children?: React.ReactNode; className?: string }>(
   ({ children, className }, ref) => (
-    <div ref={ref} className={clsx("bg-white rounded-[.5rem] border border-slate-200 shadow-sm", className)}>
+    <div ref={ref} className={clsx("bg-white rounded-xl border border-slate-200 shadow-sm", className)}>
       {children}
     </div>
   )
@@ -26,7 +26,7 @@ export const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttrib
         ref={ref}
         disabled={disabled || isLoading}
         className={clsx(
-          "inline-flex items-center justify-center px-6 py-3 text-sm font-black uppercase tracking-widest rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed",
+          "inline-flex items-center justify-center px-6 py-3 text-sm font-black uppercase tracking-widest rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed",
           variants[variant],
           className
         )}
@@ -46,7 +46,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
       <input
         ref={ref}
         className={clsx(
-          "w-full px-4 py-3.5 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-400 transition-all bg-slate-50 font-medium placeholder:text-slate-300",
+          "w-full px-4 py-3.5 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-400 transition-all bg-slate-50 font-medium placeholder:text-slate-300",
           error ? "border-red-300 bg-red-50/50" : "border-slate-100",
           className
         )}
@@ -64,7 +64,7 @@ export const Select = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttrib
       <select
         ref={ref}
         className={clsx(
-          "w-full px-4 py-3.5 border border-slate-100 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-400 transition-all bg-slate-50 cursor-pointer font-medium appearance-none",
+          "w-full px-4 py-3.5 border border-slate-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-400 transition-all bg-slate-50 cursor-pointer font-medium appearance-none",
           className
         )}
         {...props}
@@ -86,7 +86,7 @@ export const Badge: React.FC<{ children?: React.ReactNode, color?: 'blue' | 'gre
     purple: "bg-purple-100 text-purple-700"
   };
   return (
-    <span className={clsx("inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter", colors[color], className)}>
+    <span className={clsx("inline-flex items-center px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-tighter", colors[color], className)}>
       {children}
     </span>
   );
@@ -104,9 +104,9 @@ export const ConfirmModal: React.FC<{
 
   return (
     <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
-      <Card className="w-full max-w-md p-6 shadow-2xl animate-in zoom-in-95 duration-200 bg-white border-0 rounded-[2rem]">
+      <Card className="w-full max-w-md p-6 shadow-2xl animate-in zoom-in-95 duration-200 bg-white border-0 rounded-xl">
         <div className="flex flex-col items-center text-center">
-          <div className="p-4 bg-red-50 rounded-[2rem] text-red-600 mb-6 shadow-inner">
+          <div className="p-4 bg-red-50 rounded-full text-red-600 mb-6 shadow-inner">
             <AlertTriangle size={32} />
           </div>
           <h3 className="text-xl font-black text-slate-900 mb-3 tracking-tighter">{title}</h3>
@@ -169,7 +169,7 @@ export const Toast: React.FC<{
 
   return (
     <div className="fixed top-6 right-6 z-[200] animate-in slide-in-from-right-10 duration-300">
-      <Card className={clsx("flex items-center gap-4 p-4 pr-6 border-l-4 shadow-2xl rounded-2xl", styles[type])}>
+      <Card className={clsx("flex items-center gap-4 p-4 pr-6 border-l-4 shadow-2xl rounded-lg", styles[type])}>
         <div className="p-2 bg-slate-50 rounded-full">{Icons[type]}</div>
         <p className="text-sm font-black tracking-tight">{message}</p>
         <button onClick={onClose} className="p-1 text-slate-300 hover:text-slate-500 transition-colors ml-4">

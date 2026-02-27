@@ -19,7 +19,7 @@ export const Dashboard = () => {
   const [pendingItems, setPendingItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const isSuperAdmin = user?.role === UserRole.SUPERADMIN || user?.email.trim().toLowerCase() === ADMIN_EMAIL;
+  const isSuperAdmin = user?.role === UserRole.SUPERADMIN || (user?.email || '').trim().toLowerCase() === ADMIN_EMAIL;
   const isManagement = isSuperAdmin || user?.role === UserRole.ADMIN || user?.role === UserRole.EDITOR;
 
   const fetchData = async () => {
@@ -118,29 +118,29 @@ export const Dashboard = () => {
 
       {isSuperAdmin && (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-[2.5rem] flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
-             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center"><UserIcon size={28} /></div>
+          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-xl flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
+             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-green-50 text-green-600 rounded-lg flex items-center justify-center"><UserIcon size={28} /></div>
              <div>
                 <p className="text-[9px] lg:text-[10px] font-black uppercase text-slate-400">Total Users</p>
                 <p className="text-2xl lg:text-3xl font-black text-slate-900">{allUsers.filter(u => u.role === UserRole.USER).length}</p>
              </div>
           </Card>
-          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-[2.5rem] flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
-             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center"><ShieldIcon size={28} /></div>
+          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-xl flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
+             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-red-50 text-red-600 rounded-lg flex items-center justify-center"><ShieldIcon size={28} /></div>
              <div>
                 <p className="text-[9px] lg:text-[10px] font-black uppercase text-slate-400">Total Admin</p>
                 <p className="text-2xl lg:text-3xl font-black text-slate-900">{allUsers.filter(u => u.role === UserRole.ADMIN).length}</p>
              </div>
           </Card>
-          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-[2.5rem] flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
-             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center"><Edit size={28} /></div>
+          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-xl flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
+             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center"><Edit size={28} /></div>
              <div>
                 <p className="text-[9px] lg:text-[10px] font-black uppercase text-slate-400">Total Editor</p>
                 <p className="text-2xl lg:text-3xl font-black text-slate-900">{allUsers.filter(u => u.role === UserRole.EDITOR).length}</p>
              </div>
           </Card>
-          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-[2.5rem] flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
-             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center"><Fingerprint size={28} /></div>
+          <Card className="p-4 lg:p-6 border-0 shadow-lg bg-white rounded-xl flex flex-col lg:flex-row items-center gap-3 lg:gap-5 text-center lg:text-left">
+             <div className="w-12 h-12 lg:w-14 lg:h-14 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center"><Fingerprint size={28} /></div>
              <div>
                 <p className="text-[9px] lg:text-[10px] font-black uppercase text-slate-400">Total Super Admin</p>
                 <p className="text-2xl lg:text-3xl font-black text-slate-900">{allUsers.filter(u => u.role === UserRole.SUPERADMIN).length}</p>
@@ -153,7 +153,7 @@ export const Dashboard = () => {
         <div className="lg:col-span-2 space-y-8">
           {isSuperAdmin && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <Card className="p-8 border-0 shadow-lg bg-white rounded-[2.5rem]">
+              <Card className="p-8 border-0 shadow-lg bg-white rounded-xl">
                 <h3 className="text-lg font-black text-slate-900 mb-8 flex items-center gap-3 uppercase tracking-widest"><Activity size={24} className="text-red-600" /> Role Distribution</h3>
                 <div className="h-[250px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -161,13 +161,13 @@ export const Dashboard = () => {
                       <Pie data={roleData} innerRadius={60} outerRadius={80} paddingAngle={8} dataKey="value" stroke="none">
                         {roleData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                       </Pie>
-                      <Tooltip contentStyle={{ borderRadius: '24px', border: 'none', boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.15)', fontWeight: '900' }} />
+                      <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.15)', fontWeight: '900' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
               </Card>
 
-              <Card className="p-8 border-0 shadow-lg bg-white rounded-[2.5rem]">
+              <Card className="p-8 border-0 shadow-lg bg-white rounded-xl">
                 <h3 className="text-lg font-black text-slate-900 mb-8 flex items-center gap-3 uppercase tracking-widest"><Droplet size={24} className="text-blue-600" /> Blood Spread</h3>
                 <div className="h-[250px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -184,10 +184,10 @@ export const Dashboard = () => {
             </div>
           )}
 
-          <Card className="p-10 border-0 shadow-2xl bg-white relative overflow-hidden rounded-[2.5rem]">
+          <Card className="p-10 border-0 shadow-2xl bg-white relative overflow-hidden rounded-xl">
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-10">
-                <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                <div className="p-2.5 bg-blue-50 text-blue-600 rounded-lg">
                   <ShieldCheck size={20} />
                 </div>
                 <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest">Health & Eligibility</h3>
@@ -196,7 +196,7 @@ export const Dashboard = () => {
               <div className="flex flex-col lg:flex-row gap-12">
                 <div className="flex-1 space-y-8">
                   <div className={clsx(
-                    "p-8 rounded-[2rem] border-2 transition-all duration-500",
+                    "p-8 rounded-xl border-2 transition-all duration-500",
                     isEligible ? "bg-green-50 border-green-100 ring-4 ring-green-50/50" : "bg-blue-50 border-blue-100 ring-4 ring-blue-50/50"
                   )}>
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Current Status</p>
@@ -211,11 +211,11 @@ export const Dashboard = () => {
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-50/50 p-6 rounded-[1.5rem] border border-slate-100">
+                    <div className="bg-slate-50/50 p-6 rounded-lg border border-slate-100">
                       <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">Last Donated</p>
                       <p className="text-lg font-black text-slate-900">{user?.lastDonationDate ? new Date(user.lastDonationDate).toLocaleDateString() : 'No Records'}</p>
                     </div>
-                    <div className="bg-slate-50/50 p-6 rounded-[1.5rem] border border-slate-100">
+                    <div className="bg-slate-50/50 p-6 rounded-lg border border-slate-100">
                       <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">Contribution</p>
                       <p className="text-lg font-black text-slate-900">{completedCount} Times</p>
                     </div>
@@ -247,16 +247,16 @@ export const Dashboard = () => {
 
         <div className="space-y-8">
           {isManagement && (
-            <Card className="p-8 border-0 shadow-xl bg-white overflow-hidden rounded-[2.5rem]">
+            <Card className="p-8 border-0 shadow-xl bg-white overflow-hidden rounded-xl">
               <div className="flex items-center justify-between mb-8">
                 <h3 className="font-black text-slate-900 text-xs uppercase tracking-widest flex items-center gap-3"><BellRing className="text-red-600" size={20} /> Recent Updates</h3>
                 {pendingItems.length > 0 && <span className="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded-l shadow-sm animate-pulse">{pendingItems.length}</span>}
               </div>
               <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                 {pendingItems.slice(0, 10).map((item, idx) => (
-                  <div key={idx} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-red-100 transition-colors">
+                  <div key={idx} className="p-4 bg-slate-50 rounded-lg border border-slate-100 hover:border-red-100 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 overflow-hidden flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-lg bg-white border border-slate-100 overflow-hidden flex items-center justify-center">
                         {item.userAvatar || item.avatar ? <img src={item.userAvatar || item.avatar} className="w-full h-full object-cover" /> : <Droplet className="text-red-600" size={20} />}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -265,8 +265,8 @@ export const Dashboard = () => {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <button onClick={() => handleAction(item.id, item.type, item.accessType, true)} className="flex-1 bg-white border border-slate-200 p-2 rounded-xl text-green-600 hover:bg-green-600 hover:text-white transition-all flex justify-center shadow-sm"><Check size={16} /></button>
-                      <button onClick={() => handleAction(item.id, item.type, item.accessType, false)} className="flex-1 bg-white border border-slate-200 p-2 rounded-xl text-red-600 hover:bg-red-600 hover:text-white transition-all flex justify-center shadow-sm"><X size={16} /></button>
+                      <button onClick={() => handleAction(item.id, item.type, item.accessType, true)} className="flex-1 bg-white border border-slate-200 p-2 rounded-lg text-green-600 hover:bg-green-600 hover:text-white transition-all flex justify-center shadow-sm"><Check size={16} /></button>
+                      <button onClick={() => handleAction(item.id, item.type, item.accessType, false)} className="flex-1 bg-white border border-slate-200 p-2 rounded-lg text-red-600 hover:bg-red-600 hover:text-white transition-all flex justify-center shadow-sm"><X size={16} /></button>
                     </div>
                   </div>
                 ))}
@@ -275,7 +275,7 @@ export const Dashboard = () => {
             </Card>
           )}
 
-          <Card className="p-10 bg-[#0F172A] text-white border-0 shadow-2xl relative overflow-hidden rounded-[3rem] group">
+          <Card className="p-10 bg-[#0F172A] text-white border-0 shadow-2xl relative overflow-hidden rounded-xl group">
             <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.2),transparent_70%)] pointer-events-none"></div>
             <div className="relative z-10 flex flex-col items-center text-center">
               <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 px-4 py-2 rounded-full mb-10">
@@ -284,15 +284,15 @@ export const Dashboard = () => {
               </div>
 
               <div className="relative mb-6">
-                <div className="absolute -inset-4 bg-gradient-to-tr from-yellow-500 to-red-500 rounded-[2.5rem] opacity-20 blur-xl group-hover:opacity-40 transition-opacity"></div>
-                <div className="w-32 h-32 bg-slate-800 rounded-[2rem] flex items-center justify-center text-4xl font-black border-4 border-slate-800 shadow-2xl overflow-hidden relative z-10">
+                <div className="absolute -inset-4 bg-gradient-to-tr from-yellow-500 to-red-500 rounded-xl opacity-20 blur-xl group-hover:opacity-40 transition-opacity"></div>
+                <div className="w-32 h-32 bg-slate-800 rounded-xl flex items-center justify-center text-4xl font-black border-4 border-slate-800 shadow-2xl overflow-hidden relative z-10">
                   {topHero?.avatar ? (
                     <img src={topHero.avatar} className="w-full h-full object-cover" alt={topHero.name} />
                   ) : (
                     <span className="text-slate-500">{topHero?.name?.charAt(0) || '?'}</span>
                   )}
                 </div>
-                <div className="absolute -top-3 -right-3 bg-yellow-500 text-slate-900 w-10 h-10 rounded-2xl flex items-center justify-center shadow-xl z-20 ring-4 ring-[#0F172A]">
+                <div className="absolute -top-3 -right-3 bg-yellow-500 text-slate-900 w-10 h-10 rounded-lg flex items-center justify-center shadow-xl z-20 ring-4 ring-[#0F172A]">
                   <Award size={20} />
                 </div>
               </div>
@@ -306,12 +306,12 @@ export const Dashboard = () => {
               </div>
 
               <div className="w-full grid grid-cols-2 gap-4">
-                <div className="bg-slate-800/50 backdrop-blur-md p-4 rounded-2xl border border-white/5">
+                <div className="bg-slate-800/50 backdrop-blur-md p-4 rounded-lg border border-white/5">
                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">Total</p>
                    <p className="text-xl font-black text-white">{topHeroCount}</p>
                    <p className="text-[8px] font-bold text-slate-500">Donations</p>
                 </div>
-                <div className="bg-slate-800/50 backdrop-blur-md p-4 rounded-2xl border border-white/5">
+                <div className="bg-slate-800/50 backdrop-blur-md p-4 rounded-lg border border-white/5">
                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">Status</p>
                    <p className="text-xl font-black text-yellow-500">HERO</p>
                    <p className="text-[8px] font-bold text-slate-500">Rank #1</p>
@@ -326,8 +326,8 @@ export const Dashboard = () => {
 };
 
 const StatCard = ({ title, value, icon: Icon, color, bg }: any) => (
-  <Card className="p-3 lg:p-3 border-0 shadow-sm flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-3 lg:gap-5 hover:shadow-md transition-shadow group rounded-[1.5rem] text-center lg:text-left">
-    <div className={`p-3 lg:p-4 rounded-[1.25rem] ${bg} transition-transform group-hover:scale-110 shadow-inner`}><Icon className={`w-5 h-5 lg:w-6 lg:h-6 ${color} fill-current`} /></div>
+  <Card className="p-3 lg:p-3 border-0 shadow-sm flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-3 lg:gap-5 hover:shadow-md transition-shadow group rounded-xl text-center lg:text-left">
+    <div className={`p-3 lg:p-4 rounded-lg ${bg} transition-transform group-hover:scale-110 shadow-inner`}><Icon className={`w-5 h-5 lg:w-6 lg:h-6 ${color} fill-current`} /></div>
     <div><p className="text-[8px] lg:text-[10px] font-black text-slate-400 uppercase tracking-[0.1em] lg:tracking-[0.2em] mb-1 leading-none">{title}</p><p className="text-xl lg:text-2xl font-black text-slate-900 tracking-tighter">{value}</p></div>
   </Card>
 );

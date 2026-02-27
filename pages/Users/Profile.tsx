@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useAuth } from '../AuthContext';
-import { updateUserProfile, changePassword, getAppPermissions, requestIDCardAccess, getUserDonations, getUserFeedbacks } from '../services/api';
-import { Card, Input, Button, Select, Badge, Toast, useToast } from '../components/UI';
-import { User, BloodGroup, AppPermissions, UserRole, DonationStatus, DonationRecord, DonationFeedback, FeedbackStatus } from '../types';
+import { useAuth } from '../../AuthContext';
+import { updateUserProfile, changePassword, getAppPermissions, requestIDCardAccess, getUserDonations, getUserFeedbacks } from '../../services/api';
+import { Card, Input, Button, Select, Badge, Toast, useToast } from '../../components/UI';
+import { User, BloodGroup, AppPermissions, UserRole, DonationStatus, DonationRecord, DonationFeedback, FeedbackStatus } from '../../types';
 import { UserCircle, Lock, Camera, Upload, IdCard, Download, X, Clock, ShieldAlert, Trophy, Award, Star, Medal, Edit3, Image as ImageIcon, Key, LayoutDashboard, History, MessageSquareQuote, ChevronRight, Activity, Droplet, Mail, Phone, MapPin, Hash, User as UserIcon, Check, Wallpaper } from 'lucide-react';
-import { IDCardFrame } from './AdminIDCards';
+import { IDCardFrame } from '../Admin/AdminIDCards';
 import { toJpeg } from 'html-to-image';
 import Cropper from 'react-easy-crop';
 import clsx from 'clsx';
@@ -299,7 +299,7 @@ export const Profile = () => {
         cacheBust: true,
       });
       const link = document.createElement('a');
-      link.download = `BloodLink-ID-${user.name.replace(/\s+/g, '-').toLowerCase()}.jpg`;
+      link.download = `BloodLink-ID-${(user.name || 'User').replace(/\s+/g, '-').toLowerCase()}.jpg`;
       link.href = dataUrl;
       link.click();
       showToast("ID Card downloaded successfully.");

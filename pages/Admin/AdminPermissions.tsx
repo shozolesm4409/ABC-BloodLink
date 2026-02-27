@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { getUsers, handleDirectoryAccess, handleSupportAccess, handleFeedbackAccess, handleIDCardAccess, getAllFeedbacks, updateFeedbackStatus } from '../services/api';
-import { Card, Button, Badge, Toast, useToast } from '../components/UI';
-import { User, DonationFeedback, FeedbackStatus } from '../types';
+import { useAuth } from '../../AuthContext';
+import { getUsers, handleDirectoryAccess, handleSupportAccess, handleFeedbackAccess, handleIDCardAccess, getAllFeedbacks, updateFeedbackStatus } from '../../services/api';
+import { Card, Button, Badge, Toast, useToast } from '../../components/UI';
+import { User, DonationFeedback, FeedbackStatus } from '../../types';
 import { ShieldAlert, Check, X, User as UserIcon, MessageSquareQuote, Users, Search, LifeBuoy, MessageSquare, IdCard } from 'lucide-react';
 import clsx from 'clsx';
 

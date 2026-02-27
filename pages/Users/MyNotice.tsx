@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
-import { useAuth } from '../AuthContext';
-import { addNotice, updateNotice, subscribeToNotices, deleteNotice, getUsers, getAppPermissions, ADMIN_EMAIL } from '../services/api';
-import { Card, Button, Input, Badge, Toast, useToast, ConfirmModal } from '../components/UI';
+import { useAuth } from '../../AuthContext';
+import { addNotice, updateNotice, subscribeToNotices, deleteNotice, getUsers, getAppPermissions, ADMIN_EMAIL } from '../../services/api';
+import { Card, Button, Input, Badge, Toast, useToast, ConfirmModal } from '../../components/UI';
 import { Megaphone, Plus, Trash2, Edit2, Clock, User as UserIcon, Type, Palette, UserPlus, X, Send, Search, Highlighter, AlignLeft, AlignCenter, AlignRight, AlignJustify, ShieldCheck, Newspaper, Bell, Sparkles, MoreVertical, Pin, ListFilter, LayoutGrid, Type as FontIcon, Baseline, ChevronDown, Globe } from 'lucide-react';
-import { Notice, User, UserRole, AppPermissions, NoticeType } from '../types';
+import { Notice, User, UserRole, AppPermissions, NoticeType } from '../../types';
 import clsx from 'clsx';
 
 const { Link } = ReactRouterDOM;
@@ -41,7 +41,7 @@ export const MyNotice = () => {
     return () => unsubscribe();
   }, []);
 
-  const isStaff = user?.role === UserRole.ADMIN || user?.role === UserRole.EDITOR || user?.role === UserRole.SUPERADMIN || user?.email.trim().toLowerCase() === ADMIN_EMAIL;
+  const isStaff = user?.role === UserRole.ADMIN || user?.role === UserRole.EDITOR || user?.role === UserRole.SUPERADMIN || (user?.email || '').trim().toLowerCase() === ADMIN_EMAIL;
   
   // Effective Permission Check
   const canPost = (() => {
@@ -51,13 +51,13 @@ export const MyNotice = () => {
     // 2. Super Admins always can
     if (user.role === UserRole.SUPERADMIN) return true;
     // 3. Fallback to Role Global Permission
-    const roleKey = user.role.toLowerCase() as keyof AppPermissions;
+    const roleKey = (user.role || '').toLowerCase() as keyof AppPermissions;
     return perms?.[roleKey]?.rules?.canPostNotice ?? isStaff;
   })();
 
   // Filter notices based on role and tab
   const filteredNotices = notices.filter(n => {
-    const matchesSearch = n.subject.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = (n.subject || '').toLowerCase().includes(searchQuery.toLowerCase());
     // Filter strictly by active tab type
     if (activeTab === 'WEB') {
         return matchesSearch && n.type === NoticeType.WEB;

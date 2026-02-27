@@ -1,11 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../AuthContext';
-import { submitFeedback, getUserFeedbacks, getAllFeedbacks, updateFeedbackStatus, deleteFeedback, subscribeToApprovedFeedbacks, updateFeedbackMessage, toggleFeedbackVisibility } from '../services/api';
-import { Card, Button, Input, Toast, useToast, Badge, ConfirmModal } from '../components/UI';
-import { DonationFeedback, FeedbackStatus, UserRole } from '../types';
+import { useAuth } from '../../AuthContext';
+import { submitFeedback, getUserFeedbacks, getAllFeedbacks, updateFeedbackStatus, deleteFeedback, subscribeToApprovedFeedbacks, updateFeedbackMessage, toggleFeedbackVisibility } from '../../services/api';
+import { Card, Button, Input, Toast, useToast, Badge, ConfirmModal } from '../../components/UI';
+import { DonationFeedback, FeedbackStatus, UserRole } from '../../types';
 import { MessageSquareQuote, Send, Clock, Check, X, Trash2, User, Quote, Edit3, Eye, EyeOff } from 'lucide-react';
-import { PublicLayout } from '../components/PublicLayout';
+import { PublicLayout } from '../../components/PublicLayout';
 import clsx from 'clsx';
 
 export const DonationFeedbackPage = () => {

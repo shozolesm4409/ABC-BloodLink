@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { getUsers, getDonations } from '../services/api';
-import { Card, Badge } from '../components/UI';
-import { User, UserRole, DonationRecord, BloodGroup } from '../types';
+import { getUsers, getDonations } from '../../services/api';
+import { Card, Badge } from '../../components/UI';
+import { User, UserRole, DonationRecord, BloodGroup } from '../../types';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { Users, Shield, Edit, User as UserIcon, Activity, Droplet, Fingerprint } from 'lucide-react';
 
