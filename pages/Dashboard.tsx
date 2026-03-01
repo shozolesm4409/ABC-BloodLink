@@ -275,46 +275,77 @@ export const Dashboard = () => {
             </Card>
           )}
 
-          <Card className="p-10 bg-[#0F172A] text-white border-0 shadow-2xl relative overflow-hidden rounded-xl group">
-            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.2),transparent_70%)] pointer-events-none"></div>
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 px-4 py-2 rounded-full mb-10">
-                <Trophy size={16} className="text-yellow-500 fill-current" />
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-yellow-500">Top Contributor</span>
+          <Card className="relative overflow-hidden border-0 shadow-2xl rounded-[2rem] group h-full min-h-[400px]">
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-slate-900">
+              <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-bl from-yellow-500/20 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-gradient-to-tr from-red-600/20 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+            </div>
+
+            <div className="relative z-10 p-8 flex flex-col items-center h-full">
+              {/* Header Badge */}
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 px-5 py-2 rounded-full mb-12 backdrop-blur-sm shadow-[0_0_15px_rgba(234,179,8,0.1)]">
+                <Trophy size={14} className="text-yellow-500 fill-yellow-500" />
+                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-yellow-500">Top Contributor</span>
               </div>
 
-              <div className="relative mb-6">
-                <div className="absolute -inset-4 bg-gradient-to-tr from-yellow-500 to-red-500 rounded-xl opacity-20 blur-xl group-hover:opacity-40 transition-opacity"></div>
-                <div className="w-32 h-32 bg-slate-800 rounded-xl flex items-center justify-center text-4xl font-black border-4 border-slate-800 shadow-2xl overflow-hidden relative z-10">
-                  {topHero?.avatar ? (
-                    <img src={topHero.avatar} className="w-full h-full object-cover" alt={topHero.name} />
-                  ) : (
-                    <span className="text-slate-500">{topHero?.name?.charAt(0) || '?'}</span>
-                  )}
-                </div>
-                <div className="absolute -top-3 -right-3 bg-yellow-500 text-slate-900 w-10 h-10 rounded-lg flex items-center justify-center shadow-xl z-20 ring-4 ring-[#0F172A]">
-                  <Award size={20} />
-                </div>
-              </div>
-
-              <div className="space-y-1 mb-8">
-                <h4 className="text-2xl font-black tracking-tight group-hover:text-yellow-500 transition-colors">{topHero?.name || 'Loading...'}</h4>
-                <div className="flex items-center justify-center gap-2">
-                   <Badge color="red" className="bg-red-500/20 text-red-400 border border-red-500/30 font-black">{topHero?.bloodGroup || 'N/A'}</Badge>
-                   <span className="text-slate-500 text-[10px] font-black uppercase tracking-widest">{topHero?.location || 'Unknown'}</span>
+              {/* Avatar Section */}
+              <div className="relative mb-8 group-hover:scale-105 transition-transform duration-500">
+                <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-600 rounded-[2rem] rotate-6 opacity-70 blur-md group-hover:rotate-12 transition-all duration-500"></div>
+                <div className="relative w-32 h-32 bg-slate-800 rounded-[1.8rem] p-1.5 shadow-2xl ring-1 ring-white/10">
+                  <div className="w-full h-full rounded-[1.4rem] overflow-hidden bg-slate-900 relative">
+                    {topHero?.avatar ? (
+                      <img src={topHero.avatar} className="w-full h-full object-cover" alt={topHero.name} />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-slate-800 text-slate-600">
+                        <UserIcon size={40} />
+                      </div>
+                    )}
+                    {/* Rank Badge */}
+                    <div className="absolute bottom-0 right-0 bg-gradient-to-r from-yellow-500 to-orange-600 text-white w-10 h-10 rounded-tl-2xl flex items-center justify-center shadow-lg">
+                      <span className="font-black text-sm">#1</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="w-full grid grid-cols-2 gap-4">
-                <div className="bg-slate-800/50 backdrop-blur-md p-4 rounded-lg border border-white/5">
-                   <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">Total</p>
-                   <p className="text-xl font-black text-white">{topHeroCount}</p>
-                   <p className="text-[8px] font-bold text-slate-500">Donations</p>
+              {/* User Info */}
+              <div className="text-center space-y-2 mb-10">
+                <h4 className="text-3xl font-black text-white tracking-tight leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-yellow-400 group-hover:to-orange-500 transition-all duration-300">
+                  {topHero?.name || 'Loading...'}
+                </h4>
+                <div className="flex items-center justify-center gap-3">
+                   <div className="px-3 py-1 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                     <Droplet size={10} className="fill-current" />
+                     {topHero?.bloodGroup || 'N/A'}
+                   </div>
+                   <div className="w-1 h-1 rounded-full bg-slate-700"></div>
+                   <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest">{topHero?.location || 'Unknown'}</span>
                 </div>
-                <div className="bg-slate-800/50 backdrop-blur-md p-4 rounded-lg border border-white/5">
-                   <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">Status</p>
-                   <p className="text-xl font-black text-yellow-500">HERO</p>
-                   <p className="text-[8px] font-bold text-slate-500">Rank #1</p>
+              </div>
+
+              {/* Stats Grid */}
+              <div className="w-full grid grid-cols-2 gap-4 mt-auto">
+                <div className="bg-white/5 backdrop-blur-md p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors group/stat">
+                   <div className="flex items-center gap-2 mb-2 opacity-60 group-hover/stat:opacity-100 transition-opacity">
+                     <HeartPulse size={14} className="text-red-400" />
+                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-300">Donations</p>
+                   </div>
+                   <p className="text-2xl font-black text-white">{topHeroCount}</p>
+                   <div className="w-full h-1 bg-slate-700/50 rounded-full mt-3 overflow-hidden">
+                     <div className="h-full bg-red-500 w-[70%]"></div>
+                   </div>
+                </div>
+                
+                <div className="bg-white/5 backdrop-blur-md p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors group/stat">
+                   <div className="flex items-center gap-2 mb-2 opacity-60 group-hover/stat:opacity-100 transition-opacity">
+                     <Award size={14} className="text-yellow-400" />
+                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-300">Status</p>
+                   </div>
+                   <p className="text-2xl font-black text-yellow-400">HERO</p>
+                   <div className="w-full h-1 bg-slate-700/50 rounded-full mt-3 overflow-hidden">
+                     <div className="h-full bg-yellow-500 w-full"></div>
+                   </div>
                 </div>
               </div>
             </div>

@@ -54,6 +54,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
   const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [perms, setPerms] = useState<AppPermissions | null>(null);
   
@@ -103,12 +104,7 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
       });
       return () => unsubscribeMessages();
     }
-  }, [user, location.pathname]); 
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/');
-  };
+  }, [user, location.pathname]);
 
   const NavItem = ({ to, icon: Icon, label, badges }: { to: string, icon: any, label: string, badges?: BadgeConfig[] }) => {
     const isActive = location.pathname.startsWith(to);
@@ -117,33 +113,40 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
         to={to}
         onClick={() => setIsMobileMenuOpen(false)}
         className={clsx(
-          "flex items-center justify-between px-2 py-1.5 rounded-lg transition-all duration-200 group relative",
+          "flex items-center px-2 py-1.5 rounded-lg transition-all duration-200 group relative",
           isActive 
             ? "bg-red-50 text-red-600 font-bold shadow-sm" 
-            : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+            : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+          isCollapsed ? "justify-center" : "justify-between"
         )}
+        title={isCollapsed ? label : undefined}
       >
         <div className="flex items-center gap-3">
           <Icon size={18} className={clsx(isActive ? "text-red-600" : "text-slate-400 group-hover:text-slate-600")} />
-          <span className="text-[13px] tracking-tight">{label}</span>
+          {!isCollapsed && <span className="text-[13px] tracking-tight">{label}</span>}
         </div>
         
-        <div className="flex items-center gap-1">
-          {badges?.filter(b => b.count > 0).map((b, i) => (
-            <span 
-              key={i}
-              className={clsx(
-                "text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-sm animate-in zoom-in-50",
-                b.color === 'red' ? "bg-red-600" : b.color === 'blue' ? "bg-blue-600" : "bg-green-600"
-              )}
-            >
-              {b.count}
-            </span>
-          ))}
-          {(!badges || badges.every(b => b.count === 0)) && isActive && (
-            <ChevronRight size={14} className="text-red-300" />
-          )}
-        </div>
+        {!isCollapsed && (
+          <div className="flex items-center gap-1">
+            {badges?.filter(b => b.count > 0).map((b, i) => (
+              <span 
+                key={i}
+                className={clsx(
+                  "text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-sm animate-in zoom-in-50",
+                  b.color === 'red' ? "bg-red-600" : b.color === 'blue' ? "bg-blue-600" : "bg-green-600"
+                )}
+              >
+                {b.count}
+              </span>
+            ))}
+            {(!badges || badges.every(b => b.count === 0)) && isActive && (
+              <ChevronRight size={14} className="text-red-300" />
+            )}
+          </div>
+        )}
+        {isCollapsed && badges && badges.some(b => b.count > 0) && (
+           <div className="absolute top-1 right-1 w-2 h-2 bg-red-600 rounded-full border border-white"></div>
+        )}
       </Link>
     );
   };
@@ -154,7 +157,8 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
 
     return (
       <div className="space-y-1 mb-6">
-        <h3 className="px-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{title}</h3>
+        {!isCollapsed && <h3 className="px-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{title}</h3>}
+        {isCollapsed && <div className="h-px bg-slate-100 mx-2 my-4"></div>}
         <div className="space-y-0.5">{children}</div>
       </div>
     );
@@ -206,20 +210,32 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
       )}
 
       <aside className={clsx(
-        "fixed lg:static inset-y-0 left-0 z-[70] w-72 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out flex flex-col shadow-2xl lg:shadow-none h-screen overflow-hidden",
-        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        "fixed lg:static inset-y-0 left-0 z-[70] bg-white border-r border-slate-200 transition-all duration-300 ease-in-out flex flex-col shadow-2xl lg:shadow-none h-screen overflow-hidden",
+        isMobileMenuOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0",
+        isCollapsed ? "lg:w-20" : "lg:w-72"
       )}>
-        <Link to="/" className="h-20 flex-shrink-0 flex items-center px-6 gap-3 mb-2 hover:opacity-80 transition-opacity">
-          <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-xl shadow-red-100 ring-4 ring-red-50">
-            <Droplet className="text-white fill-current" size={22} />
-          </div>
-          <div>
-            <span className="text-xl font-black text-slate-900 tracking-tighter block leading-none">BloodLink</span>
-            <span className="text-[9px] font-black text-red-600 uppercase tracking-widest">Management Hub</span>
-          </div>
-        </Link>
+        <div className={clsx("h-20 flex-shrink-0 flex items-center mb-2 hover:opacity-80 transition-opacity relative", isCollapsed ? "justify-center px-0" : "px-6 gap-3")}>
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-xl shadow-red-100 ring-4 ring-red-50 flex-shrink-0">
+              <Droplet className="text-white fill-current" size={22} />
+            </div>
+            {!isCollapsed && (
+              <div>
+                <span className="text-xl font-black text-slate-900 tracking-tighter block leading-none">BloodLink</span>
+                <span className="text-[9px] font-black text-red-600 uppercase tracking-widest">Management Hub</span>
+              </div>
+            )}
+          </Link>
+          <button 
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white border border-slate-200 rounded-full items-center justify-center text-slate-400 hover:text-red-600 hover:border-red-200 shadow-sm z-50"
+          >
+            {isCollapsed ? <ChevronRight size={14} /> : <ChevronRight size={14} className="rotate-180" />}
+          </button>
+        </div>
 
-        <div className="flex-1 overflow-y-auto custom-scrollbar px-2 pb-4">
+        <div className="flex-1 overflow-y-auto custom-scrollbar px-2 pb-4 overflow-x-hidden">
+          {/* ... Sidebar Sections ... */}
           <SidebarSection title="User Hub">
             {s.dashboard && <NavItem to="/dashboard" icon={LayoutDashboard} label="Dashboard" />}
             {s.profile && <NavItem to="/profile" icon={UserCircle} label="Account Profile" />}
@@ -240,7 +256,6 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
                  ]} 
                />
              )}
-             {/* Help Center removed from sidebar */}
              {s.feedback && <NavItem to="/feedback" icon={MessageSquareQuote} label="Post Feedback" />}
           </SidebarSection>
 
@@ -269,20 +284,26 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
         </div>
 
         <div className="p-2 border-t border-slate-100 bg-slate-50/50 flex-shrink-0">
-          <div className="flex items-center gap-3 p-2 bg-white rounded-lg border border-slate-200 shadow-sm mb-2">
-            <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center font-black overflow-hidden border border-red-100">
+          <div className={clsx("flex items-center gap-3 p-2 bg-white rounded-lg border border-slate-200 shadow-sm mb-2", isCollapsed && "justify-center")}>
+            <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center font-black overflow-hidden border border-red-100 flex-shrink-0">
               {user?.avatar ? <img src={user.avatar} className="w-full h-full object-cover" /> : user?.name.charAt(0)}
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[11px] font-black text-slate-900 truncate">{user?.name}</p>
-              <p className="text-[9px] font-black text-red-500 uppercase tracking-widest">{user?.role}</p>
-            </div>
+            {!isCollapsed && (
+              <div className="flex-1 min-w-0">
+                <p className="text-[11px] font-black text-slate-900 truncate">{user?.name}</p>
+                <p className="text-[9px] font-black text-red-500 uppercase tracking-widest">{user?.role}</p>
+              </div>
+            )}
           </div>
           <button 
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 py-2 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-red-600 transition-colors bg-white rounded-lg border border-slate-200 hover:border-red-100 shadow-sm active:scale-95"
+            className={clsx(
+              "w-full flex items-center gap-2 py-2 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-red-600 transition-colors bg-white rounded-lg border border-slate-200 hover:border-red-100 shadow-sm active:scale-95",
+              isCollapsed ? "justify-center" : "justify-center"
+            )}
+            title={isCollapsed ? "Sign Out" : undefined}
           >
-            <LogOut size={16} /> Sign Out
+            <LogOut size={16} /> {!isCollapsed && "Sign Out"}
           </button>
         </div>
       </aside>
