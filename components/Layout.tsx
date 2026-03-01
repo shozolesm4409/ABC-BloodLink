@@ -206,8 +206,8 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
       )}
 
       <aside className={clsx(
-        "fixed lg:static inset-y-0 left-0 z-[70] w-72 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out lg:transform-none flex flex-col shadow-2xl lg:shadow-none h-screen overflow-hidden",
-        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        "fixed lg:static inset-y-0 left-0 z-[70] w-72 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out flex flex-col shadow-2xl lg:shadow-none h-screen overflow-hidden",
+        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         <Link to="/" className="h-20 flex-shrink-0 flex items-center px-6 gap-3 mb-2 hover:opacity-80 transition-opacity">
           <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-xl shadow-red-100 ring-4 ring-red-50">
