@@ -275,11 +275,11 @@ export const Dashboard = () => {
             </Card>
           )}
 
-          <Card className="!bg-[#0B1120] relative overflow-hidden border-0 shadow-2xl rounded-[2rem] group h-full min-h-[400px]">
+          <Card className="relative overflow-hidden border-0 shadow-2xl rounded-[2rem] group h-full min-h-[400px]">
             {/* Background Elements */}
-            <div className="absolute inset-0">
-              <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-bl from-yellow-500/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-              <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-gradient-to-tr from-red-600/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+            <div className="absolute inset-0 bg-slate-900">
+              <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-bl from-yellow-500/20 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-gradient-to-tr from-red-600/20 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
             </div>
 
             <div className="relative z-10 p-8 flex flex-col items-center h-full">
