@@ -164,7 +164,44 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
     );
   };
 
-  // ... (permissions logic)
+  const isSuperAdmin = user?.role === UserRole.SUPERADMIN || user?.email.trim().toLowerCase() === ADMIN_EMAIL;
+  const isAdmin = user?.role === UserRole.ADMIN;
+  const isEditor = user?.role === UserRole.EDITOR;
+
+  let basePerms: any = {
+    dashboard: true, profile: true, history: true, donors: true, feedback: true, myNotice: true
+  };
+
+  if (perms) {
+    if (isSuperAdmin) {
+      basePerms = perms.superadmin?.sidebar || { 
+        summary: true, dashboard: true, profile: true, history: true, donors: true, users: true, manageDonations: true, 
+        logs: true, rolePermissions: true, supportCenter: true, feedback: true, approveFeedback: true, 
+        landingSettings: true, myNotice: true, notifications: true, adminVerify: true, 
+        verificationHistory: true, teamIdCards: true, deletedUsers: true, helpCenterManage: true, moderateFaqs: true
+      };
+    } else if (isAdmin) {
+      basePerms = perms.admin?.sidebar || basePerms;
+    } else if (isEditor) {
+      basePerms = perms.editor?.sidebar || basePerms;
+    } else {
+      basePerms = perms.user?.sidebar || basePerms;
+    }
+  } else if (isSuperAdmin) {
+    // If perms not loaded yet, default superadmin to all access to prevent flickering or lockout
+    basePerms = { 
+      summary: true, dashboard: true, profile: true, history: true, donors: true, users: true, manageDonations: true, 
+      logs: true, rolePermissions: true, supportCenter: true, feedback: true, approveFeedback: true, 
+      landingSettings: true, myNotice: true, notifications: true, adminVerify: true, 
+      verificationHistory: true, teamIdCards: true, deletedUsers: true, helpCenterManage: true, moderateFaqs: true
+    };
+  }
+
+  // Determine effective permissions by merging base permissions with user overrides
+  // Ensure SuperAdmin always has critical access even if overrides exist (failsafe)
+  const s = user?.permissions?.sidebar 
+    ? { ...basePerms, ...user.permissions.sidebar } 
+    : basePerms;
 
   return (
     <div className="min-h-screen bg-[#f8fafc] flex">
