@@ -7,9 +7,9 @@ import { User, BloodGroup, UserRole, DonationRecord, DonationFeedback, FeedbackS
 import { Lock, ShieldAlert, MapPin, Phone, Calendar, User as UserIcon, Search, Droplet, Filter, X, Mail, Hash, Activity, CheckCircle2, AlertCircle, Quote, Star, Trophy, Award, Medal, MessageSquareQuote } from 'lucide-react';
 import clsx from 'clsx';
 import { getRankData } from './Profile';
-import * as ReactRouterDOM from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const { useNavigate, useLocation } = ReactRouterDOM;
+
 
 export const DonorDirectory = () => {
   const { user, updateUser } = useAuth();

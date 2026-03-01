@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
 import { 
   requestSupportAccess, 
@@ -17,7 +17,7 @@ import { LifeBuoy, Lock, BookOpen, MessageSquare, PhoneCall, HelpCircle, CheckCi
 import { ChatMessage, UserRole, User, AppPermissions } from '../../types';
 import clsx from 'clsx';
 
-const { useNavigate } = ReactRouterDOM;
+
 
 const EMOJIS = ['❤️', '🩸', '🙏', '😊', '👍', '💪', '🏥', '🚑', '💉', '🙌', '✨', '🔥', '🤝', '👋', '🌟', '💝'];
 

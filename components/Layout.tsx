@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { UserRole, AppPermissions, RolePermissions, DonationStatus, HelpStatus } from '../types';
 import { 
@@ -43,7 +43,7 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 
-const { Link, useLocation, useNavigate } = ReactRouterDOM;
+
 
 interface BadgeConfig {
   count: number;

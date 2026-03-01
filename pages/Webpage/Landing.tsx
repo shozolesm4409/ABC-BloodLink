@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db, subscribeToApprovedFeedbacks, getLandingConfig, getCachedFeedbacks, getUsers } from '../../services/api';
 import { DonationStatus, DonationFeedback, LandingPageConfig, User, BloodGroup } from '../../types';
@@ -10,7 +10,7 @@ import { getRankData } from '../Users/Profile';
 import { Card } from '../../components/UI';
 import clsx from 'clsx';
 
-const { Link } = ReactRouterDOM;
+
 
 export const Landing = () => {
   const [stats, setStats] = useState({

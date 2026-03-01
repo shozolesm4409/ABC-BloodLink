@@ -1,6 +1,6 @@
 
 import React from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './AuthContext';
 import { Layout } from './components/Layout';
 import { Login, Register, ResetPassword } from './pages/Auth';
@@ -33,7 +33,7 @@ import { AdminFaqs } from './pages/Admin/AdminFaqs';
 import { PublicLayout } from './components/PublicLayout';
 import { UserRole, RolePermissions } from './types';
 
-const { HashRouter, Routes, Route, Navigate } = ReactRouterDOM;
+
 
 const ProtectedRoute = ({ 
   children, 
