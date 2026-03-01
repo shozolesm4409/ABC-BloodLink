@@ -154,20 +154,47 @@ export const Landing = () => {
             <div className="w-20 h-1.5 bg-red-600 mx-auto rounded-full"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-16">
-            <StatCard value={loadingStats ? 0 : stats.totalUsers} label="মোট মেম্বার" icon={Users} />
-            <StatCard value={loadingStats ? 0 : stats.totalDonors} label="সফল ডোনার" icon={Activity} />
-            <StatCard value={loadingStats ? '0' : `${stats.totalVolume.toLocaleString()} ml`} label="সংগৃহীত রক্ত" icon={HeartPulse} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-20">
+            <StatCard 
+              value={loadingStats ? 0 : stats.totalUsers} 
+              label="মোট মেম্বার" 
+              icon={Users} 
+              colorClass="bg-blue-50 text-blue-600" 
+              decorationClass="bg-blue-500"
+            />
+            <StatCard 
+              value={loadingStats ? 0 : stats.totalDonors} 
+              label="সফল ডোনার" 
+              icon={Activity} 
+              colorClass="bg-emerald-50 text-emerald-600" 
+              decorationClass="bg-emerald-500"
+            />
+            <StatCard 
+              value={loadingStats ? '0' : `${stats.totalVolume.toLocaleString()} ml`} 
+              label="সংগৃহীত রক্ত" 
+              icon={HeartPulse} 
+              colorClass="bg-red-50 text-red-600" 
+              decorationClass="bg-red-500"
+            />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
             {(Object.entries(bloodStats) as [string, { count: number; volume: number }][])
               .filter(([_, data]) => data.count > 0)
               .map(([bg, data]) => (
-              <div key={bg} className="bg-white rounded-2xl p-4 shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col items-center justify-center text-center hover:shadow-xl hover:-translate-y-1 transition-all group">
-                 <h3 className="text-2xl font-black text-[#c1121f] mb-1 group-hover:scale-110 transition-transform">{bg}</h3>
-                 <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">{data.count} Donations</p>
-                 <div className="bg-slate-50 px-3 py-1 rounded-full text-[10px] font-bold text-slate-600 border border-slate-200">
+              <div key={bg} className="group relative bg-white rounded-3xl p-5 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col items-center justify-center text-center hover:shadow-[0_20px_40px_-10px_rgba(220,38,38,0.15)] hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-rose-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                 
+                 <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mb-3 group-hover:bg-red-600 group-hover:rotate-6 transition-all duration-300 shadow-inner">
+                    <span className="text-xl font-black text-red-600 group-hover:text-white transition-colors duration-300">{bg}</span>
+                 </div>
+                 
+                 <div className="space-y-0.5">
+                   <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Donations</p>
+                   <p className="text-lg font-black text-slate-900 group-hover:text-red-600 transition-colors">{data.count}</p>
+                 </div>
+                 
+                 <div className="mt-3 bg-slate-50 px-3 py-1 rounded-full text-[9px] font-black text-slate-500 border border-slate-100 group-hover:border-red-100 group-hover:bg-red-50 group-hover:text-red-600 transition-colors">
                     {data.volume < 1000 ? `${data.volume} ML` : `${(data.volume / 1000).toFixed(2).replace(/\.00$/, '')} L`}
                  </div>
               </div>
@@ -323,14 +350,17 @@ export const Landing = () => {
   );
 };
 
-const StatCard = ({ value, label, icon: Icon }: any) => (
-  <Card className="p-6 border-0 shadow-lg flex items-center gap-5 hover:shadow-xl transition-all bg-white rounded-[2rem] group">
-    <div className="p-5 rounded-2xl bg-red-50 text-red-600 transition-transform group-hover:scale-110 shadow-inner">
-      <Icon size={28} />
+const StatCard = ({ value, label, icon: Icon, colorClass, decorationClass }: any) => (
+  <div className="relative overflow-hidden p-8 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex items-center gap-6 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 bg-white rounded-[2.5rem] group">
+    <div className={clsx("absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2 transition-transform duration-700 group-hover:scale-150", decorationClass)}></div>
+    
+    <div className={clsx("relative z-10 p-5 rounded-2xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-inner", colorClass)}>
+      <Icon size={32} strokeWidth={2.5} />
     </div>
-    <div>
-      <p className="text-3xl font-black text-slate-900 tracking-tighter">{value}</p>
-      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 leading-none">{label}</p>
+    
+    <div className="relative z-10">
+      <p className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter mb-1">{value}</p>
+      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 leading-none">{label}</p>
     </div>
-  </Card>
+  </div>
 );
