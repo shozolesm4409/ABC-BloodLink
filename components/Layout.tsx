@@ -55,8 +55,56 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [perms, setPerms] = useState<AppPermissions | null>(null);
+  
+  const [counts, setCounts] = useState({
+    donations: 0,
+    access: 0,
+    messenger: 0,
+    support: 0,
+    feedbacks: 0,
+    helpRequests: 0
+  });
 
-  // ... (existing useEffects)
+  useEffect(() => {
+    getAppPermissions().then(setPerms);
+    
+    if (user?.role === UserRole.ADMIN || user?.role === UserRole.EDITOR || user?.role === UserRole.SUPERADMIN) {
+      const fetchCounts = async () => {
+        try {
+          const [users, donations, feedbacks, helpReqs] = await Promise.all([
+            getUsers(), 
+            getDonations(), 
+            getAllFeedbacks(),
+            getHelpRequests()
+          ]);
+          setCounts(prev => ({
+            ...prev,
+            access: users.filter(u => u.directoryAccessRequested || u.supportAccessRequested || u.feedbackAccessRequested || u.idCardAccessRequested).length,
+            donations: donations.filter(d => d.status === DonationStatus.PENDING).length,
+            feedbacks: feedbacks.filter(f => f.status === 'PENDING').length,
+            helpRequests: helpReqs.filter(h => h.status === HelpStatus.PENDING).length
+          }));
+        } catch (e) {
+          console.error("Failed to fetch notification counts", e);
+        }
+      };
+      fetchCounts();
+    }
+
+    if (user) {
+      const unsubscribeMessages = subscribeToAllIncomingMessages(user.id, (msgs) => {
+        const relevantMsgs = msgs.filter(m => m.receiverId === user.id || (user.role !== UserRole.USER && m.roomId.startsWith('SUPPORT_')));
+        const messengerCount = relevantMsgs.filter(m => !m.roomId.startsWith('SUPPORT_')).length;
+        const supportCount = relevantMsgs.filter(m => m.roomId.startsWith('SUPPORT_')).length;
+        setCounts(prev => ({ ...prev, messenger: messengerCount, support: supportCount }));
+      }, (err) => {
+        console.debug("Layout message subscription restricted");
+      });
+      return () => unsubscribeMessages();
+    }
+  }, [user, location.pathname]);
 
   const NavItem = ({ to, icon: Icon, label, badges }: { to: string, icon: any, label: string, badges?: BadgeConfig[] }) => {
     const isActive = location.pathname.startsWith(to);
